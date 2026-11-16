@@ -39,6 +39,7 @@ export default function AppTabs() {
 export function TabButton({
                               children,
                               isFocused,
+                              ref: _ref,
                               ...props
                           }: TabTriggerSlotProps) {
     return (

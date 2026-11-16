@@ -1,0 +1,67 @@
+name: Expo CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: expo-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate Expo Application
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Check Expo dependencies
+      - name: Expo Doctor
+        run: npx expo-doctor
+
+      # 5. TypeScript validation
+      - name: TypeScript Check
+        run: npx tsc --noEmit
+
+      # 6. Validate Expo configuration
+      - name: Expo Configuration
+        run: npx expo config --type public
+
+      # 7. Build Web (Expo Router + NativeWind)
+      - name: Build Web
+        run: npx expo export --platform web
+
+      # 8. Upload Web artifact
+      - name: Upload Web Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: messenger-web
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7

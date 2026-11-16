@@ -1,5 +1,4 @@
 import {Redirect} from "expo-router";
-import "../global.css";
 const isAuthenticated = false;
 
 export default function Index(){

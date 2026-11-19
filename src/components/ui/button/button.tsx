@@ -8,5 +8,5 @@ export const Button:FC<ButtonProps> = ({...props}) => {
         h-12 items-center justify-center
         rounded-xl bg-primary px-5
         ${props.disabled ? "opacity-50" : ""}
-      `} onPress={() => props.onPress?.()} ><Text>{props.children}</Text></Pressable>
+      `} onPress={() => props.onPress?.()} >{props.children}</Pressable>
 }

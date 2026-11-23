@@ -120,22 +120,7 @@ jobs:
           profile: pixel_6
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: |
-            adb reverse tcp:8081 tcp:8081
-            npx expo start --localhost --port 8081 > /tmp/expo-metro.log 2>&1 &
-            METRO_PID=$!
-            trap 'kill "$METRO_PID"' EXIT
-
-            for attempt in $(seq 1 60); do
-              if curl --silent --fail http://127.0.0.1:8081/status > /dev/null; then
-                break
-              fi
-              sleep 2
-            done
-
-            curl --fail --silent http://127.0.0.1:8081/status > /dev/null
-            npx expo run:android --no-bundler
-            npm run test:maestro
+          script: bash scripts/maestro-ci.sh
 
   # ==========================================
   # 3. ANDROID BUILD

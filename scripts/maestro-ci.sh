@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export EXPO_PACKAGER_PROXY_URL=http://localhost:8081
+
 adb reverse tcp:8081 tcp:8081
 
 npx expo start --localhost --port 8081 > /tmp/expo-metro.log 2>&1 &

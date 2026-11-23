@@ -6,6 +6,7 @@ import {
 import createHttpClient from './http-client';
 import {useAuth} from '../auth/useAuth'
 import {HttpContextValue} from "@/types/http";
+import {API_BASE_URL} from "@/constants/api";
 
 const HttpContext = createContext<HttpContextValue | null>(null);
 
@@ -14,7 +15,7 @@ export function HttpProvider({ children }: { children: ReactNode }) {
 
     const http = useMemo(
         () => createHttpClient({
-            baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:8545',
+            baseURL: API_BASE_URL,
             getAccessToken,
             onUnauthorized: logout,
         }),[getAccessToken, logout],

@@ -7,9 +7,13 @@ import {
     useEffect, ReactNode,
 } from 'react';
 import * as SecureStore from 'expo-secure-store';
-import {ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY} from "@/types/http";
+import {
+    ACCESS_TOKEN_KEY,
+    AuthContextValue,
+    REFRESH_TOKEN_KEY,
+} from "@/types/http";
 import {UserSummary} from "@/types/user";
-import {AuthContextValue} from "@/types/http";
+import {API_BASE_URL} from "@/constants/api";
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
@@ -68,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const signIn = useCallback(async (username: string, password: string) => {
         const response = await fetch(
-            `${process.env.EXPO_PUBLIC_API_URL}/auth/login`,
+            `${API_BASE_URL}/auth/login`,
             {
                 method: 'POST',
                 headers: {

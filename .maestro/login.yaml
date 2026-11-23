@@ -1,0 +1,19 @@
+appId: com.art_25.frontend
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible:
+      id: login.heading
+    timeout: 60000
+- assertVisible:
+    id: login.heading
+- tapOn:
+    id: login.submit
+- tapOn: "OK"
+- assertVisible:
+    id: login.heading
+- tapOn:
+    id: login.registerLink
+- assertVisible:
+    id: register.heading

@@ -51,10 +51,11 @@ export default function RegisterScreen() {
 
     return (
         <View className="flex-1 justify-center px-6 gap-4">
-            <Text className="text-2xl font-bold text-center">
+            <Text className="text-2xl font-bold text-center" testID="register.heading">
                 Регистрация
             </Text>
             <TextInput
+                testID="register.name"
                 className="border border-gray-300 rounded-xl px-4 py-3"
                 placeholder="Имя"
                 value={name}
@@ -62,6 +63,7 @@ export default function RegisterScreen() {
                 autoCapitalize="words"
             />
             <TextInput
+                testID="register.email"
                 className="border border-gray-300 rounded-xl px-4 py-3"
                 placeholder="Email"
                 value={email}
@@ -71,6 +73,7 @@ export default function RegisterScreen() {
                 autoCorrect={false}
             />
             <TextInput
+                testID="register.password"
                 className="border border-gray-300 rounded-xl px-4 py-3"
                 placeholder="Пароль"
                 value={password}
@@ -78,11 +81,11 @@ export default function RegisterScreen() {
                 secureTextEntry
             />
             <TextInput
+                testID="register.displayName"
                 className="border border-gray-300 rounded-xl px-4 py-3"
                 placeholder="Отображаемое имя"
                 value={displayName}
                 onChangeText={setDisplayName}
-                secureTextEntry
             />
             <Button
                 type="button"
@@ -92,7 +95,7 @@ export default function RegisterScreen() {
                 {isLoading ? (
                     <ActivityIndicator color="white" />
                 ) : (
-                    <Text className="text-white">
+                    <Text className="text-white" testID="register.submit">
                         Зарегистрироваться
                     </Text>
                 )}
@@ -101,7 +104,7 @@ export default function RegisterScreen() {
                 type="button"
                 onPress={() => router.replace("/login")}
             >
-                <Text className="text-white">
+                <Text className="text-white" testID="register.loginLink">
                     Уже есть аккаунт? Войти
                 </Text>
             </Button>

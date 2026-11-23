@@ -5,6 +5,7 @@ import {
     TextInput,
     Alert,
     ActivityIndicator,
+    Pressable,
 } from 'react-native';
 
 import { Button } from '@/components/ui/button';
@@ -42,10 +43,11 @@ export default function Login() {
 
     return (
         <View className="flex-1 justify-center gap-[15px] px-5">
-            <Text className="text-2xl font-bold">
+            <Text className="text-2xl font-bold" testID="login.heading">
                 Авторизация
             </Text>
             <TextInput
+                testID="login.username"
                 className="h-12 rounded-xl border border-gray-300 px-4"
                 placeholder="Имя"
                 value={username}
@@ -55,6 +57,7 @@ export default function Login() {
                 autoCorrect={false}
             />
             <TextInput
+                testID="login.password"
                 className="h-12 rounded-xl border border-gray-300 px-4"
                 placeholder="Пароль"
                 value={password}
@@ -69,15 +72,17 @@ export default function Login() {
                 {isSubmitting ? (
                     <ActivityIndicator color="#FFFFFF" />
                 ) : (
-                    <Text className="text-white">
+                    <Text className="text-white" testID="login.submit">
                         Войти
                     </Text>
                 )}
             </Button>
-            <Link href="/(auth)/register">
-                <Text className="text-center text-blue-600">
-                    Нет аккаунта? Зарегистрироваться
-                </Text>
+            <Link href="/(auth)/register" asChild>
+                <Pressable testID="login.registerLink">
+                    <Text className="text-center text-blue-600">
+                        Нет аккаунта? Зарегистрироваться
+                    </Text>
+                </Pressable>
             </Link>
         </View>
     );
